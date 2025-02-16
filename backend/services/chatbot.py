@@ -1,20 +1,34 @@
+# 
+
 import os
 import openai
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv("backend/.env")
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = "sk-ju5ornhnGG3g_mAVhQRAfz9Pz0m5F_8Grgt5hkr5dKT3BlbkFJbde_r04ZpaxcPD-b6ccw5tPlqTbzTmhqmp24MO60QA"
 
 def generate_response(compliance_report):
     try:
-        client = openai.OpenAI(api_key=openai.api_key)  
+        client = openai.OpenAI(api_key=OPENAI_API_KEY)  
+
+        prompt = f"""
+        You are a tax compliance expert.  
+        Review the following compliance report and provide insights strictly from a **regulatory compliance perspective**:  
+        
+        {compliance_report}
+
+        Your response should include:
+        - **Key compliance risks**: Identify specific tax reporting, misclassification, or missing documentation risks.
+        - **Regulatory concerns**: Highlight any potential violations or non-adherence to tax laws.
+        - **Actionable recommendations**: Provide steps to improve compliance, such as audits, documentation improvements, or reclassification of transactions.
+        """
 
         response = client.chat.completions.create(
-            model="gpt-4",  
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a compliance expert reviewing financial documents."},
-                {"role": "user", "content": f"Analyze this compliance report and provide insights:\n\n{compliance_report}"}
+                {"role": "user", "content": prompt}
             ],
             temperature=0.5,
             max_tokens=500

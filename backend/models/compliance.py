@@ -1,35 +1,55 @@
 from openai import OpenAI
 import os
+from dotenv import load_dotenv
+import json
+load_dotenv()
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+print("Loaded API Key:", repr(os.environ.get("OPENAI_API_KEY")))
+# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+# OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENAI_API_KEY = "sk-ju5ornhnGG3g_mAVhQRAfz9Pz0m5F_8Grgt5hkr5dKT3BlbkFJbde_r04ZpaxcPD-b6ccw5tPlqTbzTmhqmp24MO60QA"
 if not OPENAI_API_KEY:
     raise ValueError("Missing OpenAI API Key. Please set OPENAI_API_KEY as an environment variable.")
 
 client = OpenAI(api_key=OPENAI_API_KEY)
+print(f"Loaded API Key: {OPENAI_API_KEY}")
+print(repr(OPENAI_API_KEY))  # Debugging step
+
 
 def check_compliance(entities):
     """
     Function to check compliance of extracted entities using OpenAI's model.
-    :param entities: Extracted entity dictionary from the parsed document.
-    :return: Compliance report as a dictionary.
+    Returns a JSON response or an error.
     """
+    sanitized_entities = str(entities).replace("{", "{{").replace("}", "}}")  # Escape curly braces
+
     prompt = f"""
-    You are a tax compliance expert. Analyze the following extracted tax data for any compliance issues:
-    {entities}
+    You are a tax compliance expert. Analyze the following extracted tax data for compliance issues.  
+    Ignore any formatting inconsistencies, date irregularities, or entity recognition errors.  
+    Assume all data is correctly structured and valid. {sanitized_entities} 
 
-    Provide a structured report indicating:
-    - Any discrepancies or missing information.
-    - Compliance with standard tax regulations.
-    - Recommendations for improvements.
+    Your task is to assess the data **purely from a tax compliance perspective** and highlight potential issues related to tax reporting, legal obligations, and regulatory adherence.  
 
-    Return the response in a structured JSON format.
+    Provide a JSON report in the following structure:  
+    {{
+        "discrepancies": ["List only genuine compliance issues, such as missing tax documentation, incorrect categorization, unreported taxable income, or potential fraud risks."],
+        "compliance_assessment": "Summarize compliance status based only on regulatory risks and obligations.",
+        "recommendations": ["Provide tax-related action steps to improve compliance, such as audit suggestions, reclassification of expenses, or necessary documentation updates."]
+    }} 
     """
 
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}]
-    )
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            response_format={"type": "json_object"}
+        )
 
-    compliance_report = response.choices[0].message.content.strip()
-    
-    return compliance_report
+        # Ensure valid JSON response
+        compliance_report = response.choices[0].message.content.strip()
+        return json.loads(compliance_report)  # Converts string to JSON
+
+    except json.JSONDecodeError:
+        return {"error": "Invalid JSON response from OpenAI"}
+    except Exception as e:
+        return {"error": f"API Error: {str(e)}"}
