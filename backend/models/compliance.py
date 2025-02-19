@@ -7,7 +7,8 @@ load_dotenv()
 print("Loaded API Key:", repr(os.environ.get("OPENAI_API_KEY")))
 # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_API_KEY = "sk-ju5ornhnGG3g_mAVhQRAfz9Pz0m5F_8Grgt5hkr5dKT3BlbkFJbde_r04ZpaxcPD-b6ccw5tPlqTbzTmhqmp24MO60QA"
+# OPENAI_API_KEY = "sk-ju5ornhnGG3g_mAVhQRAfz9Pz0m5F_8Grgt5hkr5dKT3BlbkFJbde_r04ZpaxcPD-b6ccw5tPlqTbzTmhqmp24MO60QA"
+OPENAI_API_KEY = "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"
 if not OPENAI_API_KEY:
     raise ValueError("Missing OpenAI API Key. Please set OPENAI_API_KEY as an environment variable.")
 

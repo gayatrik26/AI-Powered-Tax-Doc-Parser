@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv("backend/.env")
 
-OPENAI_API_KEY = "sk-ju5ornhnGG3g_mAVhQRAfz9Pz0m5F_8Grgt5hkr5dKT3BlbkFJbde_r04ZpaxcPD-b6ccw5tPlqTbzTmhqmp24MO60QA"
+OPENAI_API_KEY = "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"
+# OPENAI_API_KEY = "sk-ju5ornhnGG3g_mAVhQRAfz9Pz0m5F_8Grgt5hkr5dKT3BlbkFJbde_r04ZpaxcPD-b6ccw5tPlqTbzTmhqmp24MO60QA"
 
 def generate_response(compliance_report):
     try:
