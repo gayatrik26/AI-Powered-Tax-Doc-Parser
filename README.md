@@ -161,3 +161,12 @@ Contributions are welcome! To contribute:
 ---
 
 *Note: Replace placeholder values (e.g., `your_openai_api_key_here`) with your actual data.*
+
+## Screenshots
+
+<img width="1512" alt="Image" src="https://github.com/user-attachments/assets/03540b62-375f-44b6-839a-6247d3d7a218" />
+<img width="1512" alt="Image" src="https://github.com/user-attachments/assets/63c580a8-7478-4edf-b1f8-7dfbd8efb387" />
+<img width="1512" alt="Image" src="https://github.com/user-attachments/assets/ea5cbbe5-92e5-4ac4-b9c5-bf9d57bfaa7b" />
+<img width="1512" alt="Image" src="https://github.com/user-attachments/assets/16643075-55c5-4707-89d0-26b69a970b52" />
+<img width="1512" alt="Image" src="https://github.com/user-attachments/assets/87c1a22c-5adb-44e9-871d-c593524783de" />
+<img width="1512" alt="Image" src="https://github.com/user-attachments/assets/8c0e29c9-d770-41e8-9540-9e94c4a8f526" />
