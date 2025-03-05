@@ -9,7 +9,7 @@ The AI-Powered Tax Document Parser is a system designed to process various finan
 - **Document Parsing**: Utilizes tools like `pdfplumber` or `PyMuPDF` to extract text from PDF documents.
 - **Named Entity Recognition (NER)**: Employs `spaCy` or OpenAI's language models to identify key entities such as income, deductions, and dates.
 - **Compliance Advisory**: Compares extracted data against current tax regulations to provide recommendations and identify discrepancies.
-- **Backend API**: Developed using Node.js with Express.js to handle document processing and AI model interactions.
+- **Backend API**: Developed using FAST API to handle document processing and AI model interactions.
 - **Frontend Interface**: A web-based platform that allows users to upload documents and view parsed results in an intuitive interface.
 
 ## File Structure
